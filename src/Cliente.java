@@ -14,7 +14,8 @@ public class Cliente
 		{
 			return nome;
 		}
-		private void setNome(String nome) {
+		private void setNome(String nome) 
+		{
 			this.nome = nome;
 		}
 
@@ -26,7 +27,8 @@ public class Cliente
 		{
 			return telefone;
 		}
-        private void setTelefone(String telefone) {
+        private void setTelefone(String telefone) 
+	{
 			this.telefone = telefone;
 		}
 
@@ -38,7 +40,8 @@ public class Cliente
 		{
 			return senha;
 		}
-		private void setSenha(int senha) {
+		private void setSenha(int senha) 
+		{
 			this.senha = senha;
 		}
 		
