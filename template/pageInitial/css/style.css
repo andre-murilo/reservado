@@ -927,6 +927,16 @@ textarea.form-control {
   stroke-linecap: round;
 }
 
+.banner {
+  transition: all 1s;
+  max-height: 300px;
+}
+
+.banner.pre-animation {
+  opacity:0;
+  max-height: 0;
+}
+
 @-webkit-keyframes loader-rotate {
   100% {
     -webkit-transform: rotate(360deg);

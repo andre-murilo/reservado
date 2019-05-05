@@ -8,7 +8,7 @@ var params = [Cadartro]
 
 function getParams(){
     let urlParams = new URLSearchParams(window.location.search);
-    let params = [];
+    let params = ["Page"];
 
     for(var i = 0; i < parameters.length; i++)
     {
