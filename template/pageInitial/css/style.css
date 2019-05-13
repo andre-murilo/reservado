@@ -47,7 +47,9 @@ h1, h2, h3, h4, h5,
   max-width: 500px;
   max-height: 200px;
 }
-
+.map-table-hover-on {
+  fill: green;
+}
 
 
 @media screen and (max-width: 991px) {
