@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Raleway" rel="stylesheet">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="css/animate.css">
+
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
+
+
+</head>
+	
+<body  data-spy="scroll" data-target="#site-navbar" data-offset="200" onload="init()">
+    <script src="js/jquery-3.4.1.min.js"></script>
+      
+    <script src="js/urlparams.js"></script>
+
+<!-- Main Container -->
+<div class="container"> 
+  <!-- Navigation -->
+  <header>
+    
+    
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="index.html">Reservado</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                  <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="index.html#section-about">Sobre</a>
+
+                  </div>
+                </div>
+        </nav>
+  </header>
+  <br>
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    
+	  <center>
+    <img src="images/san Remo.jpg" width="215" height="163" alt=""/>
+	</center>
+    <p class="tagline">Escolha sua mesa aqui!</p>
+  </section>
+  <section><h2>Restaurante San Remo</h2></section>
+<img src="images/Restaurante 01.png" width="744" height="349" alt=""/>
+    </div>
+    <div id="divDataHora" class="container">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="grid-contatos" class="table table-striped">
+                    <tbody id="table-mesa">
+                        <tr>
+                            <td scope="row"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="divEscolheMesa">
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="FakeReserva.js"></script>
+    <script src="FakeRestaurante.js"></script>
+    <script>
+        function exibemesa(data,hora) {
+            // Remove todas as linhas do corpo da tabela
+            $("#table-mesa").html("");
+
+            // Popula a tabela com os registros do banco de dados
+            var rest = dbRestaurante.restaurante[0];
+            var mesasIndisponiveis = [];
+            console.log(rest.totalDeMesas);
+            for (let i = 0; i < rest.totalDeMesas ; i++) {
+                disponibilidade = "DISPONÍVEL";
+                for (let j = 0; j < dbReservas.reservas.length; j++) {
+                    let reserva = dbReservas.reservas[j];
+                    if(reserva.data == data && reserva.hora == hora && reserva.numeroDaMesa == i+1){
+                        disponibilidade = "INDISPONIVEL";
+                        mesasIndisponiveis.push(i+1);
+                    }
+                    
+                }
+                $("#table-mesa").append(`<tr><td scope="row"> Mesa ${i+1}</td>
+                    <td>${disponibilidade}</td></tr>`);
+            }
+            $("#divEscolheMesa").html("");
+            $("#divEscolheMesa").append(``);
+            var disponivel = false;
+            for (let i = 0; i < rest.totalDeMesas; i++) {
+                disponivel = true;
+                for (let j = 0; j < mesasIndisponiveis.length; j++) {
+                    if(mesasIndisponiveis[j] == i+1){
+                         disponivel = false;
+                    }
+                }
+                if(disponivel){
+                    let option = document.createElement('option');
+                    option.text = i+1;
+                    document.querySelector('#selectMesa').add(option, null);
+                } 
+            }
+
+            $("#reservarBtn").click(function (){
+                let campoNome = "João das Neves";
+                let campoMesa = parseInt(document.getElementById("selectMesa").value);
+                let campoData = data;
+                let campoHora = hora;
+                let novaReserva = {nome: campoNome,numeroDaMesa: campoMesa,data: campoData,hora: campoHora};
+
+                insertReserva(novaReserva);
+
+                window.location.replace("reservaEfetuada.html");
+            });
+            
+        }
+
+        function escolheData(){
+            $("#divDataHora").html("");
+            
+            rest = dbRestaurante.restaurante[0];
+            
+            
+            $("#divDataHora").append(`Escolha a data da reserva<br>
+        <input type="date" id="dataDaReserva">
+        <br>Escolha a hora da reserva<br><select id="selectHora"></select> <br><input type="button" class="btn btn-primary" value="Mostrar Mesas" id="mostarMesasBtn"><br>`);
+            for (let i = 0; i < rest.horarios.length; i++) {
+                let option = document.createElement('option');
+                option.text = rest.horarios[i];
+                document.querySelector('#selectHora').add(option, null);
+                
+            }
+            
+            $("#mostarMesasBtn").click(function (){
+                var strData = document.getElementById("dataDaReserva").value;
+                var strHora = document.getElementById("selectHora").value;
+                console.log(strHora);
+                if(validaData(strData)){
+                    exibemesa(strData,strHora);
+                }else{
+                    alert("A data selecionada é invalida");
+                }
+            });
+            
+        }
+
+        function validaData(strData){
+            return true;
+        }
+
+        
+
+        function init() {
+      
+           escolheData();
+            
+        }
+    </script>
+	</div>
+</body>
+</html>
