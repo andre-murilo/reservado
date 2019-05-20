@@ -4,6 +4,5 @@ class Program
     {
         Application app = new Application();
         app.Initialize();
-
     }
 }

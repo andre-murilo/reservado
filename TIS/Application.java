@@ -16,13 +16,34 @@ public class Application implements IServerCallbackable
         System.out.println("Request: " + path);
 
         // write header
-        response.WriteHeader("Date", "Fri, 31 Dec 1999 23:59:59 GMT");
+        response.WriteHeader("Date", "Fri, 17 May 2019 23:59:59 GMT");
         response.WriteHeader("Server", "Reservado-Server-1.0");
-        response.WriteHeader("Expires", "Sat, 01 Jan 2000 00:59:59 GMT");
-        response.WriteHeader("Last-modified", "Fri, 09 Aug 1996 14:21:40 GMT");
-
+        response.WriteHeader("Expires", "Fri, 17 May 2019 23:59:59 GMT");
+        response.WriteHeader("Last-modified", "Fri, 17 May 2019 23:59:59 GMT");
+        
+        if(path.equals("/getClients"))
+        {
+        	System.out.println("Enviar clientes");
+        	
+        	Content c = new Content();
+        	StringBuilder sb = new StringBuilder();
+        	for(Cliente client : reservado.GetClientes())
+        	{
+        		String formated = String.format("%d|%s|%s<br>", client.GetCodigo(), client.GetNome(), client.GetTelefone());
+        		sb.append(formated);
+        	}
+        	
+        	c.Write(sb.toString());
+        	c.UpdateLength();
+        	
+        	response.Send(c);
+        	return;
+        }
+        
         // write body
         Content content = response.LoadFileContent(path);
+        
+        
 
         // send
         response.Send(content);
@@ -34,6 +55,8 @@ public class Application implements IServerCallbackable
         this.reservado = new Reservado();
         this.database = new Database(reservado);
         this.database.Load();
+        
+        this.database.Save();
     }   
 
     
