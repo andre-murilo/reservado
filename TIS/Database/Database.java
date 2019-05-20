@@ -3,6 +3,7 @@ package Database;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,7 +138,7 @@ public class Database
 
     private void LoadReservas(Restaurante restaurante)
     {
-        String[] lines = ReadAllLines("./Data/Mesa.dat");
+        String[] lines = ReadAllLines("./Data/Reserva.dat");
 
         for(String line : lines)
         {
@@ -156,6 +157,89 @@ public class Database
 
     public void Save()
     {
+        SaveClients();
+        SaveRestaurants();
         
+    }
+    
+    private void SaveClients()
+    {
+      File file = new File("./Data/Cliente.dat");
+      try
+      {
+         FileWriter fileStream = new FileWriter(file, false);
+         
+         for(Cliente c : reservado.GetClientes())
+         {
+            String formated = String.format("%d:%s:%s:%d\n", c.GetCodigo(), c.GetNome(), c.GetTelefone(), c.GetSenha());
+            fileStream.write(formated);
+         }
+         fileStream.close();
+      }
+      catch(Exception e)
+      {
+         
+      }
+    }
+    
+    private void SaveRestaurants()
+    {
+    	List<Mesa> mesas = new ArrayList<Mesa>();
+    	List<Reserva> reservas = new ArrayList<Reserva>();
+    	
+    	for(Restaurante rest : reservado.GetRestaurantes())
+    	{
+    		mesas.addAll(rest.GetMesas());
+    		reservas.addAll(rest.GetReservas());
+    	}
+    	
+    	SaveMesas(mesas);
+    	SaveReservas(reservas);
+    }
+    
+    private void SaveMesas(List<Mesa> mesas)
+    {
+    	File file = new File("./Data/Mesa.dat");
+    	
+    	try
+    	{
+    		FileWriter fileStream = new FileWriter(file, false);
+    		for(Mesa mesa : mesas)
+        	{
+    			String formated = String.format("%d:%d:%d\n", mesa.GetCodigo(), mesa.GetCodigoRestaurante(), mesa.GetStatus());
+                
+    			fileStream.write(formated);
+        	}
+    		
+    		fileStream.close();
+    	}
+    	catch(Exception e)
+    	{
+    		
+    	}
+    }
+    
+    private void SaveReservas(List<Reserva> reservas)
+    {
+    	File file = new File("./Data/Reserva.dat");
+    	
+    	try
+    	{
+    		FileWriter fileStream = new FileWriter(file, false);
+    		for(Reserva reserva : reservas)
+        	{
+
+    			String formated = String.format("%d:%d:%d:%d\n", reserva.GetCodigo(), reserva.GetCodigoRestaurante(),
+    					reserva.GetCodigoCliente(), reserva.GetCodigoMesa());
+                
+    			fileStream.write(formated);
+        	}
+    		
+    		fileStream.close();
+    	}
+    	catch(Exception e)
+    	{
+    		
+    	}
     }
 }
