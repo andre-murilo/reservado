@@ -12,4 +12,21 @@ public class Content {
         this.status = status;
         this.contentSize = size;
     }
+    
+    public Content()
+    {
+    	this.extension = "text/html";
+    	this.status = "200";
+    }
+    
+    public void Write(String text)
+    {
+    	this.data = text.getBytes();
+    }
+    
+    
+    public void UpdateLength()
+    {
+    	this.contentSize = data.length;
+    }
 }

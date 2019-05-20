@@ -62,8 +62,10 @@ public class WebServer {
             // client
 
             try {
+            	
                 Client cliente = new Client(this.instance, sockClient);
-                cliente.run();
+                Thread t = new Thread(cliente);
+                t.start();
             } catch (Exception e) {
             }
 
