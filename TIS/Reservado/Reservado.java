@@ -14,6 +14,11 @@ public class Reservado
         this.restaurantes = new ArrayList<Restaurante>();
         this.clientes = new ArrayList<Cliente>();
     }
+    
+    public List<Cliente> GetClientes()
+    {
+      return this.clientes;
+    }
 
     public List<Restaurante> GetRestaurantes()
     {
