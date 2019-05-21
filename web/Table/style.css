@@ -1,0 +1,41 @@
+.restaurante-list {
+    border: 2px solid black;
+}
+
+ul li {
+    display: inline;
+    padding-right: 3px;
+}
+
+
+.block {
+    border-top: 2px;
+    width: 128px;
+    height: 128px;
+    background: blue;
+    display: inline-block;
+    background: url("mesa_livre.png");
+    z-index: 1;
+    -webkit-transition: opacity 300ms;
+    transition: opacity 300ms;
+    border: 2px solid black;
+}
+
+
+.block:hover {
+    background: url("mesa_livre.png");
+}
+
+.block.selecionado {
+    background: url("mesa_selecionado.png");
+}
+
+.block.reservado {
+    background-color: rgba(255, 0, 0, 255);
+}
+
+.block.reservado:hover {
+    background: red;
+}
+
+
