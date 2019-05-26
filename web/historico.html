@@ -20,7 +20,7 @@
     <![endif]-->
 </head>
 
-<body onload="onIndexLoaded()">
+<body>
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
@@ -51,11 +51,11 @@
     <div class="subnavbar-inner">
       <div class="container">
         <ul class="mainnav">
-          <li class="active"><a href="index.html"><i class="icon-home"></i><span>Home</span> </a> </li>
+          <li><a href="index.html"><i class="icon-home"></i><span>Home</span> </a> </li>
           <li><a href="restaurantes.html"><i class="icon-glass"></i><span>Restaurantes</span> </a> </li>
           <li><a href="reserva.html"><i class="icon-calendar"></i><span>Reservar</span> </a></li>
 
-          <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
+          <li class="dropdown active"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
                 class="icon-long-arrow-down"></i><span>Meus dados</span> <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="perfil.html">Perfil</a></li>
@@ -76,88 +76,61 @@
         <div class="row">
 
 
-          <!-- bem vindo -->
+          <!-- Mesas -->
           <div class="span12">
-            <div id="target-1" class="widget">
+            <div class="widget">
+
+              <div class="widget-header">
+                <i class="icon-list"></i>
+                <h3>Histórico de Reservas</h3>
+              </div>
+
+
+              <!-- content -->
               <div class="widget-content">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Restaurante</th>
+                      <th scope="col">Data</th>
+                      <th scope="col">Hora</th>
+                      <th scope="col">Mesa</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">San Remo</th>
+                      <td>15/01/2019</td>
+                      <td>22:00</td>
+                      <td>9</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">San Remo</th>
+                      <td>20/03/2019</td>
+                      <td>11:00</td>
+                      <td>2</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Delicinha</th>
+                      <td>04/04/2019</td>
+                      <td>12:00</td>
+                      <td>5</td>
 
-                <h2>Bem Vindo ao Reservado</h2><br>
+                    </tr>
 
-                <p>Muitos restaurantes oferecem a possibilidade de agendar uma mesa para um dia e um horário específico,
-                  esse processo é tradicionalmente feito pelo telefone, o que pode não ser a maneira mais eficiente de
-                  se agendar uma mesa.
-                  buscando uma maneira fácil, prática e organizada de realizar tal processo apresentamos o “Reservado”,
-                  uma aplicação web que busca facilitar o
-                  processo de agendamento de mesas e horários em restaurantes, tudo com facilidade e praticidade.</p>
-
-
-
-                <ol class="faq-list">
-
-                  <!-- faq 1 -->
-                  <li id="faq-1">
-                    <div class="faq-icon">
-                      <div class="faq-number">1</div>
-                    </div>
-                    <div class="faq-text">
-                      <h4>Por que escolher o Reservado?</h4>
-                      <p>Porque somos foda!</p>
-                    </div>
-                  </li>
-
-                  <!-- faq 2 -->
-                  <li id="faq-2">
-                    <div class="faq-icon">
-                      <div class="faq-number">2</div>
-                    </div>
-                    <div class="faq-text">
-                      <h4>Como faço para reservar uma mesa?</h4>
-                      <p>Após o cadastro, é possível selecionar uma mesa para à reserva.</p>
-                    </div>
-                  </li>
+                  </tbody>
+                </table>
 
 
-                </ol>
-
-              </div> <!-- /widget-content -->
+              </div>
 
             </div>
-          </div>
 
-          <!-- status -->
-          <div class="span12">
-            <div class="widget widget-nopad">
-              <div class="widget-header"> <i class="icon-list-alt"></i>
-                <h3> Status do reservado</h3>
-              </div>
-              <!-- /widget-header -->
-              <div class="widget-content">
-                <div class="widget big-stats-container">
-                  <div class="widget-content">
-                    <h6 class="bigstats">Acompanhe nossa jornada em tempo real!</h6>
-                    <div id="big_stats" class="cf">
-
-                      <div class="stat">
-                        <h3>Usuários</h3><br><span id="total-users" class="value icon-user"></i> 0</span>
-                      </div>
-                      <div class="stat">
-                        <h3>Reservas</h3><br><span id="total-reservas" class="value icon-calendar"> 0</span>
-                      </div>
-                      <div class="stat">
-                        <h3>Afiliados</h3><br><span id="total-restaurantes" class="value icon-glass"> 0</span>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
 
-          <!-- /span6 -->
-          <div class="span6">
-          </div>
+
+
           <!-- /span6 -->
         </div>
         <!-- /row -->

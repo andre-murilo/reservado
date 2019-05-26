@@ -4,11 +4,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.net.URL;
+import java.util.*;
+import java.util.AbstractMap.SimpleImmutableEntry;
+
+import org.omg.CORBA.Environment;
 
 public class Request
 {
     private InputStream reader;
     private Map<String, String> params;
+    private String method;
+    private HashMap<String, String> postParams;
 
     public Request(InputStream reader)
     {
@@ -51,10 +58,27 @@ public class Request
         }
     }
 
+    private Boolean nextIsValue = false;
     private void ParseLine(String line)
     {
-        //System.out.println(line);
+
+        if(line.equals(""))
+        {
+            System.out.println("Achou!");
+            nextIsValue = true;
+            return;
+        }
+
+        if(nextIsValue) {
+            // parse post data
+            postParams = ParsePostData(line);
+            return;
+        }
+
+
         String[] splitted = line.split(" ");
+
+        
 
         if(splitted.length < 2) return;
 
@@ -66,7 +90,19 @@ public class Request
 
                 params.put("path", path);
                 params.put("http_ver", httpVer);
+
+                this.method = "GET";
             break;
+
+            case "POST":
+                String queryPath = splitted[1];
+                params.put("path", queryPath);
+                params.put("queryPath", queryPath);
+                //System.out.println(queryPath);
+
+                this.method = "POST";
+            break;
+
             case "Host:":
                 String host = splitted[1];
 
@@ -92,6 +128,29 @@ public class Request
         //System.out.println(line);
     }
     
+    private HashMap<String, String> ParsePostData(String noFormated)
+    {
+        System.out.println(noFormated);
+
+        String[] fields = noFormated.split("&");
+        String[] kv = null;
+
+        HashMap<String, String> things = new HashMap<String, String>();
+
+
+        for (int i = 0; i < fields.length; ++i)
+        {
+            kv = fields[i].split("=");
+            if (kv.length == 2)
+            {
+                things.put(kv[0], kv[1]); 
+            }
+        }
+
+        return things;
+    }
+
+    
 
     public Map<String, String> GetParams()
     {
@@ -103,5 +162,19 @@ public class Request
         return params.get("path");
     }
 
+    public String GetPostPath()
+    {
+        return params.get("queryPath");
+    }
+
+    public HashMap<String, String> GetPostParams()
+    {
+        return this.postParams;
+    }
+
+    public String GetMethod()
+    {
+        return this.method;
+    }
 
 }
