@@ -44,8 +44,8 @@ function getStats()
         var obj = JSON.parse(data);
         
         $("#total-users").text(" " + obj.clientes);
-        $("#total-reservas").text(" " + obj.restaurantes);
-        $("#total-restaurantes").text(" " + obj.reservas);
+        $("#total-reservas").text(" " + obj.reservas);
+        $("#total-restaurantes").text(" " + obj.restaurantes);
 
     }) ;
 }
@@ -62,10 +62,25 @@ function onRestaurantesPageLoaded()
 
 function loadRestaurantes()
 {
-    // ajax
-    // $.post("ajax/getRestaurantes", function(data) {
 
-    // });
+    $.post("ajax/getRestaurantes", function(data) {
+        console.log(data);
+
+        let obj = JSON.parse(data);
+
+        let rests = obj.restaurantes;
+
+        let html = '';
+
+        rests.forEach(e => {
+            html += `<div class="restaurant-container"><div><a href="#" class="rest-title">${e}</a></div><img src="img/rest.jpg" alt="" srcset=""></div>`;
+
+            console.log(e);
+        });
+
+        $("#restaurantes").html(html);
+
+    });
 
 }
 
@@ -77,12 +92,10 @@ function cadastrarRestaurante()
 
     console.log(nome + " " + endereco + " " + mesas);
 
-    // ajax
-    // $.post("ajax/cadastrar", {name: "Teste", endereco: "Teste2", mesas: 25}, function(data) {
-    //     alert("Resposta: " + data);
-    // });
-
-
+    ajax
+    $.post("ajax/cadastrar", {name: nome, endereco: endereco, mesas: mesas}, function(data) {
+        alert("Resposta: " + data);
+    });
 
     return false;
 }

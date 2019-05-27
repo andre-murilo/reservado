@@ -1,7 +1,10 @@
 import Server.*;
+import jdk.nashorn.api.scripting.JSObject;
+import jdk.nashorn.internal.ir.debug.JSONWriter;
 import Reservado.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 import Database.*;
 
@@ -51,6 +54,10 @@ public class Application implements IServerCallbackable
                 sb.append(ParseGetStats());
             break;
 
+            case "/ajax/getRestaurantes":
+            	sb.append(ParseGetRestaurantes());
+            break;
+            
             case "/ajax/cadastrar":
                 sb.append(ParseCadastroRestaurante(params));
             break;
@@ -91,6 +98,8 @@ public class Application implements IServerCallbackable
          * 	}
          * */
 
+        
+        
         sb.append("{\n");
         sb.append("\"clientes\": "+clientsCount+",\n");
         sb.append("\"restaurantes\": "+restaurantes+",\n");
@@ -98,6 +107,35 @@ public class Application implements IServerCallbackable
         sb.append("\n}");
         
         return sb.toString();
+    }
+    
+    private String ParseGetRestaurantes()
+    {
+    	StringBuilder sb = new StringBuilder();
+    	
+    	sb.append("{\n");
+    	sb.append("\"restaurantes\": [");
+    	
+    	
+    	List<Restaurante> rests = reservado.GetRestaurantes();
+    	int size = rests.size();
+    	
+    	for(int i = 0; i < size; i++)
+    	{
+    		String nome = rests.get(i).GetNome();
+    		
+    		if(i == size - 1) {
+    			sb.append("\""+nome+"\"");
+    		} else {
+    			sb.append("\""+nome+"\",");
+    		}
+    		
+    	}
+   
+    	sb.append("]\n}");
+    	
+    	
+    	return sb.toString();
     }
 
     private String ParseCadastroRestaurante(HashMap<String, String> params)
@@ -138,7 +176,7 @@ public class Application implements IServerCallbackable
         this.database = new Database(reservado);
         this.database.Load();
         
-        this.database.Save();
+        //this.database.Save();
     }   
 
     
