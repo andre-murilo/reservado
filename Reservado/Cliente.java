@@ -1,6 +1,6 @@
 package Reservado;
 
-public class Cliente
+public class Cliente 
 {
     private int codigo;
     private String nome;
@@ -55,6 +55,8 @@ public class Cliente
     {
         this.senha = senha;
     }
+
+  
 
 
 

@@ -116,8 +116,6 @@ public class Database
 
             LoadMesas(restaurante);
             LoadReservas(restaurante);
-            
-            reservado.AddRestaurante(restaurante);
         }
     }
 

@@ -1,10 +1,7 @@
 import Server.*;
-import jdk.nashorn.api.scripting.JSObject;
-import jdk.nashorn.internal.ir.debug.JSONWriter;
 import Reservado.*;
 
 import java.util.HashMap;
-import java.util.List;
 
 import Database.*;
 
@@ -54,13 +51,13 @@ public class Application implements IServerCallbackable
                 sb.append(ParseGetStats());
             break;
 
-            case "/ajax/getRestaurantes":
-            	sb.append(ParseGetRestaurantes());
-            break;
-            
             case "/ajax/cadastrar":
                 sb.append(ParseCadastroRestaurante(params));
             break;
+
+            case "/ajax/reservar":
+                sb.append(CadastrarReservaCliente(params));
+                break;
 
             default:
                 sb.append("error 404");
@@ -71,6 +68,25 @@ public class Application implements IServerCallbackable
         content.UpdateLength();
 
         resp.Send(content);
+    }
+
+    private String CadastrarReservaCliente(HashMap<String, String> params){
+        StringBuilder sb = new StringBuilder();
+
+        String nome = params.get("nome");
+        String telefone = params.get("telefone");
+        int cod = reservado.GetClientes().size() + 1;
+
+        Cliente NewCliente = new Cliente(cod, nome,telefone);
+        reservado.AddCliente(NewCliente);
+
+        sb.append("{\n");
+        sb.append("\"id\": "+cod + ",\n");
+        sb.append("\"nome\": \""+nome+"\",\n");
+        sb.append("\"telefone\": \"" +telefone+"\"");
+        sb.append("\n}");
+        System.out.println(sb.toString());
+        return sb.toString();
     }
 
     private String ParseGetStats()
@@ -98,44 +114,13 @@ public class Application implements IServerCallbackable
          * 	}
          * */
 
-        
-        
         sb.append("{\n");
         sb.append("\"clientes\": "+clientsCount+",\n");
         sb.append("\"restaurantes\": "+restaurantes+",\n");
         sb.append("\"reservas\": "+reservas + "\n");
         sb.append("\n}");
-        
+        System.out.println(sb.toString());
         return sb.toString();
-    }
-    
-    private String ParseGetRestaurantes()
-    {
-    	StringBuilder sb = new StringBuilder();
-    	
-    	sb.append("{\n");
-    	sb.append("\"restaurantes\": [");
-    	
-    	
-    	List<Restaurante> rests = reservado.GetRestaurantes();
-    	int size = rests.size();
-    	
-    	for(int i = 0; i < size; i++)
-    	{
-    		String nome = rests.get(i).GetNome();
-    		
-    		if(i == size - 1) {
-    			sb.append("\""+nome+"\"");
-    		} else {
-    			sb.append("\""+nome+"\",");
-    		}
-    		
-    	}
-   
-    	sb.append("]\n}");
-    	
-    	
-    	return sb.toString();
     }
 
     private String ParseCadastroRestaurante(HashMap<String, String> params)
@@ -176,7 +161,7 @@ public class Application implements IServerCallbackable
         this.database = new Database(reservado);
         this.database.Load();
         
-        //this.database.Save();
+        this.database.Save();
     }   
 
     
