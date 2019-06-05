@@ -50,26 +50,19 @@
   <div class="subnavbar">
     <div class="subnavbar-inner">
       <div class="container">
-        <ul class="mainnav">
-          <li><a href="index.html"><i class="icon-home"></i><span>Home</span> </a> </li>
-          <li class="active"><a href="restaurantes.html"><i class="icon-glass"></i><span>Restaurantes</span> </a> </li>
-          <li><a href="reserva.html"><i class="icon-calendar"></i><span>Reservar</span> </a></li>
-
-          <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                class="icon-long-arrow-down"></i><span>Meus dados</span> <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="perfil.html">Perfil</a></li>
-              <li><a href="reservas.html">Reservas</a></li>
-              <li><a href="historico.html">Histórico</a></li>
+          <ul class="mainnav">
+              <li><a href="index.html"><i class="icon-home"></i><span>Home</span> </a> </li>
+              <li class="active"><a href="restaurantes.html"><i class="icon-glass"></i><span>Restaurantes</span> </a> </li>
+              <li><a href="reservas.html"><i class="icon-book"></i><span>Minhas Reservas</span></a></li>
+              <li><a href="historico.html"><i class="icon-list"></i><span>Histórico</span></a></li>
             </ul>
-          </li>
-        </ul>
       </div>
       <!-- /container -->
     </div>
     <!-- /subnavbar-inner -->
   </div>
   <!-- /subnavbar -->
+  
   <div class="main">
     <div class="main-inner">
       <div class="container">
@@ -81,75 +74,33 @@
             <div class="widget">
 
               <div class="widget-header">
-                <i class="icon-th-large"></i>
+                <i class="icon-glass"></i>
                 <h3>Restaurantes</h3>
               </div>
 
               <div class="widget-content">
-                <div class="restaurant-container">
-                  <div><a href="#" class="rest-title">San Remo</a></div>
-                  <img src="img/rest.jpg" alt="" srcset="">
+
+                <div id="restaurantes">
+
+                  <div name="restaurante_cell"class="widget-content">
+                    <h3>San Remo</h3>  
+                    <img src="img/rest.jpg" height="200px" width="200px">    
+                    <h4> Restaurante cinco estrelas especializado em frutos do mar. </h4>
+                    <a href="Reserva.html?id=1" class="btn btn-primary">Reservar</a>
+                  </div>
+                  <br>
+                  <div name="restaurante_cell" class="widget-content">
+                    <h3>Sabor do Brasil</h3>  
+                    <img src="img/logo1.png" height="200px" width="200px">    
+                    <h4> Culianária tradicional brasileira e comida de boteco, venha esperimentar o tempero que tem o gostinho do brasil. </h4>
+                    <a href="Reserva.html?id=1" class="btn btn-primary">Reservar</a>
+                  </div>
+
                 </div>
+
               </div>
             </div>
           </div>
-
-          <!-- Cadastro restaurante -->
-
-          <div class="span12">
-            <div class="widget">
-              <div class="widget-header">
-                <i class="icon-user"></i>
-                <h3>Cadastrar um restaurante</h3>
-              </div>
-
-              <div class="widget-content">
-                <form id="cadastro-restaurante" class="form-horizontal" onsubmit="return cadastrarRestaurante();">
-                  <fieldset>
-
-                    <!-- Nome -->
-                    <div class="control-group">
-                      <label class="control-label" for="nome">Nome:</label>
-                      <div class="controls">
-                        <input placeholder="Satisfeito" type="text" class="span5" id="nome">
-                      </div>
-                    </div>
-
-                    <!-- Endereco -->
-                    <div class="control-group">
-                      <label class="control-label" for="nome">Endereço:</label>
-                      <div class="controls">
-                        <input placeholder="Rua Rio de Janeiro, 176, Centro BH, MG" type="text" class="span5" id="endereco">
-                      </div>
-                    </div>
-
-                    <!-- Numero de mesas -->
-                    <div class="control-group">
-                      <label class="control-label" for="nome">Número de mesas:</label>
-                      <div class="controls">
-                        <input placeholder="40" type="text" class="span1" id="mesas">
-                      </div>
-                    </div>
-
-                    <!-- actions -->
-                    <div class="form-actions">
-                      <button type="submit" class="btn btn-primary">Cadastrar</button>
-                    </div>
-
-
-                  </fieldset>
-                </form>
-              </div>
-            </div>
-          </div>
-
-
-
-
-
-
-
-
 
           <!-- /span6 -->
         </div>

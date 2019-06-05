@@ -53,16 +53,8 @@
         <ul class="mainnav">
           <li><a href="index.html"><i class="icon-home"></i><span>Home</span> </a> </li>
           <li><a href="restaurantes.html"><i class="icon-glass"></i><span>Restaurantes</span> </a> </li>
-          <li class="active"><a href="reserva.html"><i class="icon-calendar"></i><span>Reservar</span> </a></li>
-
-          <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i
-                class="icon-long-arrow-down"></i><span>Meus dados</span> <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="perfil.html">Perfil</a></li>
-              <li><a href="reservas.html">Reservas</a></li>
-              <li><a href="historico.html">Histórico</a></li>
-            </ul>
-          </li>
+          <li><a href="reservas.html"><i class="icon-book"></i><span>Minhas Reservas</span></a></li>
+          <li><a href="historico.html"><i class="icon-list"></i><span>Histórico</span></a></li>
         </ul>
       </div>
       <!-- /container -->
@@ -75,38 +67,43 @@
       <div class="container">
         <div class="row">
 
+          <!-- Dados restaurante -->
+          <div class="span12">
+            <div class="widget">
 
+              <div class="widget-header">
+                <i class="icon-book"></i>
+                <h3>San Remo</h3><!-- Nome do restaurante-->
+              </div>
+
+
+              <!-- content -->
+              <div class="widget-content">
+                  <div class="span12">
+                    <img src="img/rest.jpg" height="200px" width="200px">
+                  </div>
+              </div>
+
+            </div>
+
+          </div>
           <!-- Mesas -->
           <div class="span12">
             <div class="widget">
 
               <div class="widget-header">
-                <i class="icon-th-large"></i>
-                <h3>Mesas</h3>
+                <i class="icon-pencil"></i>
+                <h3>Reservar uma mesa</h3>
               </div>
 
 
               <!-- content -->
-              <div style="height: 840px;" class="widget-content">
+              <div class="widget-content">
 
+                <h6 class="bigstats">Selecine a data e a hora da reserva</h6>
                 <!-- filtros -->
                 <form id="filter-table" class="form-horizontal" onsubmit="return submitFilter();">
                   <fieldset>
-
-                    <!-- Restaurante -->
-                    <div class="control-group">
-                      <label class="control-label">Restaurante:</label>
-
-                      <div class="controls">
-                        <select name="" id="restaurante-selected">
-                          <option value="Satisfeito">Satisfeito</option>
-                          <option value="Delicinha">Delicinha</option>
-                          <option value="Rapadura">Rapadura</option>
-                        </select>
-                      </div>
-
-                    </div>
-
 
                     <!-- Data -->
                     <div class="control-group">
@@ -118,8 +115,31 @@
 
                     </div>
 
+                    <!-- Hora -->
+                    <div class="control-group">
+                        <label class="control-label">Hora:</label>
+  
+                        <div class="controls">
+                          <select name="" id="restaurante-selected">
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="19:00">19:00</option>
+                            <option value="20:00">20:00</option>
+                            <option value="21:00">21:00</option>
+                            <option value="22:00">22:00</option>
+                            <option value="23:00">23:00</option>
+                          </select>
+                        </div>
+  
+                      </div>
+
+                    
+
                     <!-- button -->
-                    <div class="form-actions">
+                    <div class="controls">
                       <button type="submit" class="btn btn-primary">Filtrar</button>
                     </div>
 
@@ -131,7 +151,7 @@
                 </form>
 
                 <!-- mesas -->
-                <h6 class="bigstats">Todas as mesas do restaurante: Satisfeito</h6>
+                <h6 class="bigstats">Todas as mesas do restaurante: San Remo</h6>
 
 
                 <ul class="table-list">
